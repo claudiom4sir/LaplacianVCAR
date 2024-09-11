@@ -54,6 +54,7 @@ def main():
     parser.add_argument('--pretrained_path', type=str, default='', help='Path to pre-trained models to resume training')
     parser.add_argument('--display_every', default=500, type=int, help='Display results on Tensorboard after every X iterations')
     parser.add_argument('--eval_every', default=100, type=int, help='Run evaluatation every X epochs')
+    parser.add_argument('--ckpt_every', default=10, type=int, help='Save checkpoint every X epochs')
     parser.add_argument('--patch_size', default=64, type=int, help='Dimension of the patchs for training')
     parser.add_argument('--cropped', default=False, action='store_true', help='Use it when using the cropped version of the dataset')
 
@@ -95,6 +96,7 @@ def main():
     model_name = args.model_name
     std = args.std
     cropped = args.cropped
+    ckpt_every = args.ckpt_every
 
     print('> Experiment ' + exp_name)
     os.makedirs(exp_name, exist_ok=True)
@@ -122,7 +124,7 @@ def main():
     testset_loader = DataLoader(testset, num_workers=1)
 
     # define loss function
-    criterion = LaplacianLossImages(levels=pyramid_levels, std=1).to(device)
+    criterion = LaplacianLossImages(levels=pyramid_levels, std=std).to(device)
     psnr = PeakSignalNoiseRatio(data_range=1).to(device)
 
     best_delta_psnr = -1000 if pretrained_path == '' else torch.load(pretrained_path)['best_delta_psnr']
@@ -141,6 +143,7 @@ def main():
                 g['lr'] = lr_scheduler[epoch]
             print(f'> Current learning rate set to {lr_scheduler[epoch]}')
         pbar = tqdm(total=len(trainset_loader), ncols=100)
+        
         for batch_n, data in enumerate(trainset_loader, 1):
             compressed, gt = data
             compressed, gt = compressed.to(device), gt.to(device)
@@ -182,6 +185,8 @@ def main():
         epoch_psnr_y /= len(trainset_loader)
         epoch_delta_psnr_y /= len(trainset_loader)
         print(f'> Epoch {epoch} finished with dPSNR_Y: {epoch_delta_psnr_y:.3f}, PSNR_Y: {epoch_psnr_y:.3f}')
+        
+        # run evaluation
         if epoch % evaluate_every == 0:
             model.eval()
             test_loss = 0
@@ -230,9 +235,12 @@ def main():
                             'optimizer_state_dict': optimizer.state_dict(), 'it': it, 'best_delta_psnr':
                                 best_delta_psnr}, f'{exp_name}/best.pth')
             print(f'> Best dPSNR so far: {best_delta_psnr}')
-        torch.save({'epoch': epoch, 'model_state_dict': model.state_dict(),
-                    'optimizer_state_dict': optimizer.state_dict(), 'it': it, 'best_delta_psnr': best_delta_psnr},
-                   f'{exp_name}/epoch_{epoch}.pth' % (exp_name, epoch))
+        
+        # save model ckpt
+        if ckpt_every % epoch == 0:
+            torch.save({'epoch': epoch, 'model_state_dict': model.state_dict(),
+                        'optimizer_state_dict': optimizer.state_dict(), 'it': it, 'best_delta_psnr': best_delta_psnr},
+                    f'{exp_name}/epoch_{epoch}.pth' % (exp_name, epoch))
 
     print(f'> Training complete. Best dPSNR on test set: {best_delta_psnr:.3f}')
     writer.close()

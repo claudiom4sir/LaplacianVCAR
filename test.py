@@ -37,7 +37,6 @@ def main():
 
     # parameters
     out_path = args.out_path_restored
-    model_name = args.model_name
     pretrained_path = args.pretrained_path
 
     temporal_neighborhood = args.window_size
