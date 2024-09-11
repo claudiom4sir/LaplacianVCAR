@@ -55,6 +55,7 @@ def main():
     parser.add_argument('--display_every', default=500, type=int, help='Display results on Tensorboard after every X iterations')
     parser.add_argument('--eval_every', default=100, type=int, help='Run evaluatation every X epochs')
     parser.add_argument('--patch_size', default=64, type=int, help='Dimension of the patchs for training')
+    parser.add_argument('--cropped', default=False, action='store_true', help='Use it when using the cropped version of the dataset')
 
     # network parameters
     parser.add_argument('--model_name', default='XS', choices=['XS', 'S', 'M', 'L', 'XL'], help='Model name (must be XS, S, M, L, XL)')
@@ -93,6 +94,7 @@ def main():
     pyramid_levels = args.lap_levels
     model_name = args.model_name
     std = args.std
+    cropped = args.cropped
 
     print('> Experiment ' + exp_name)
     os.makedirs(exp_name, exist_ok=True)
@@ -113,7 +115,7 @@ def main():
 
     # load trainset and testset
     trainset = Dataset(path_compressed_train, path_gt_train, temp_size=temporal_neighborhood, max_video_number=1e4,
-                       max_seq_length=1e4, is_cropped=False, patch_size=patch_size)
+                       max_seq_length=1e4, is_cropped=cropped, patch_size=patch_size)
     trainset_loader = DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=cpu_count(), worker_init_fn=seed_worker, generator=g)
     testset = Dataset(path_compressed_test, path_gt_test, temp_size=temporal_neighborhood, is_test=True,
                       max_video_number=1e4, max_seq_length=50, excluded_path=excluded_path_test, is_cropped=False)
