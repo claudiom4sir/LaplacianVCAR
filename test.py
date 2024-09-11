@@ -39,7 +39,6 @@ def main():
     out_path = args.out_path_restored
     model_name = args.model_name
     pretrained_path = args.pretrained_path
-    pretrained_path = f'{pretrained_path}/best.pth'
 
     temporal_neighborhood = args.window_size
     save_data = args.save
