@@ -34,7 +34,7 @@ python simple_check.py
 ```
 
 ### Pretrained models
-All the pretrained models are available at [TODO]()
+Pretrained models (QP37) are available [here](https://www.dropbox.com/scl/fo/vfbirbg14osmck1wwga8f/AJbigRmFy8BFZrNnctr1t84?rlkey=uj2on47z3rbzf3lopxk6216ly&st=7qwfbt2b&dl=0).
 
 ### Train
 Train a new model using the following code:
