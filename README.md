@@ -12,13 +12,13 @@ For each frame, it creates a folder containing frame crops. It may take time and
 
 ## Usage
 
-### Installation and requirements
+### Installation
 The code is based on Python 3.7.13 and CUDA 11.7. See `requirements.txt` for the dependencies.
 
-#### Conda enviroment
+#### Conda setup
 ```
 conda create -n laphevc python=3.7.13 -y
-git@github.com:claudiom4sir/LaplacianVCAR.git
+git clone https://github.com/claudiom4sir/LaplacianVCAR.git
 cd LaplacianVCAR
 conda activate laphevc
 pip install -r requirements.txt
@@ -32,7 +32,6 @@ bash build.sh
 ```
 python simple_check.py
 ```
-
 ### Pretrained models
 Pretrained models (QP37) are available [here](https://www.dropbox.com/scl/fo/vfbirbg14osmck1wwga8f/AJbigRmFy8BFZrNnctr1t84?rlkey=uj2on47z3rbzf3lopxk6216ly&st=7qwfbt2b&dl=0).
 
