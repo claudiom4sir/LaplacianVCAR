@@ -52,6 +52,19 @@ python test.py
 As for training, adjust some arguments before using the script. For example, use `--pretrained_path` to
 set the path to the pretrained model you want to test. Add `--h` for more details. 
 
+## Citations
+```
+@article{10.1145/3727147,
+  author = {Rota, Claudio and Buzzelli, Marco and Bianco, Simone and Schettini, Raimondo},
+  title = {Scalable Residual Laplacian Network for HEVC-compressed Video Restoration},
+  year = {2025},
+  publisher = {Association for Computing Machinery},
+  doi = {10.1145/3727147},
+  note = {Just Accepted},
+  journal = {ACM Trans. Multimedia Comput. Commun. Appl.}
+}
+```
+
 ## Acknowledgement
 The code is based on [STDF-pytorch](https://github.com/ryanxingql/stdf-pytorch).
 
