@@ -1,4 +1,6 @@
-# Scalable Residual Laplacian Network for HEVC-compressed Video Restoration (TOMM 2025)
+# Scalable Residual Laplacian Network for HEVC-compressed Video Restoration
+
+ACM Transactions on Multimedia Computing, Communications and Applications (2025)
 
 [Claudio Rota](https://scholar.google.com/citations?user=HwPPoh4AAAAJ&hl=en), [Marco Buzzelli](https://scholar.google.com/citations?hl=en&user=kSFvKBoAAAAJ), [Simone Bianco](https://scholar.google.com/citations?hl=en&user=P08LSD0AAAAJ), and [Raimondo Schettini](https://scholar.google.com/citations?hl=en&user=ue60cV0AAAAJ)
 
