@@ -69,14 +69,15 @@ set the path to the pretrained model you want to test. Add `--h` for more detail
 
 ## Citations
 ```
-@article{10.1145/3727147,
-  author = {Rota, Claudio and Buzzelli, Marco and Bianco, Simone and Schettini, Raimondo},
-  title = {Scalable Residual Laplacian Network for HEVC-compressed Video Restoration},
-  year = {2025},
-  publisher = {Association for Computing Machinery},
-  doi = {10.1145/3727147},
-  note = {Just Accepted},
-  journal = {ACM Trans. Multimedia Comput. Commun. Appl.}
+@article{rota2025scalable,
+  title={Scalable Residual Laplacian Network for HEVC-compressed Video Restoration},
+  author={Rota, Claudio and Buzzelli, Marco and Bianco, Simone and Schettini, Raimondo},
+  journal={ACM Transactions on Multimedia Computing, Communications and Applications},
+  volume={21},
+  number={6},
+  pages={1--22},
+  year={2025},
+  publisher={ACM New York, NY}
 }
 ```
 
